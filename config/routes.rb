@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
 
   get 'about', to: 'about#index'
+
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
+
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
+  
   root to: 'products#index'
 
   resources :products, only: [:index, :show]
@@ -12,6 +20,12 @@ Rails.application.routes.draw do
   end
 
   resources :orders, only: [:create, :show]
+
+  get 'sessions/new'
+  get 'sessions/create'
+  get 'sessions/destroy'
+  get 'users/create'
+  get 'users/new'
 
   namespace :admin do
     root to: 'dashboard#show'
